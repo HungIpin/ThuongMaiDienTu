@@ -1,0 +1,137 @@
+﻿@model QuanLyBanGiayASP.Models.ViewModels.StoreImportDetailViewModels
+    <div class="container">
+        <form method="get">
+            <br /><br />
+            @{
+                //tạo 1 số lượng sản phẩm mới vào trong kho như là sử dụng Spinner
+             }
+            <div class="row">
+                <div class="col-12">
+                    <h2 style="text-align:center"> Product List</h2>
+                </div><div class="col-9"></div>
+                <div class="col-md-3 col-sm-6 text-right">
+                    <a asp-action="Create" class="btn essence-btn"><i class="fas fa-plus"></i>   &nbsp; Import Product</a>
+                </div>
+            </div>
+            <br />
+            <div class="col-12" style="height:150px; background-color:antiquewhite">
+                @* We will add search criteria *@
+                <div >
+                    <div class="row" style="padding:20px;">
+                        <div class="col-1">
+
+                        </div>
+                        <div class="col-2">
+                            Name
+                        </div>
+                        <div class="col-3">
+                            @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="col-1">
+
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        <div class="col-1">
+
+                        </div>
+
+                    </div>
+                   
+                </div>
+            </div>
+
+            <br /><br />
+
+            <div class="container">
+                <table class="table table-striped border">
+                    <tr class="table-info">
+                        <th style="text-align:center; width:20%"></th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Available
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Merchants
+                        </th>
+                        <th>
+                            Brands
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.ListProducts)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.ID">
+                                    <img src="@item.Image" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9;" />
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Name)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(m => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Available)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Merchants.Name_merchant)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Brands.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.InStock)
+                            </td>
+                            <td style="text-align:center">
+                                <button type="submit" class="btn btn-primary form-control" asp-action="edit" asp-route-id="@item.ID">
+                                    <i class="fas fa-share-square "></i>
+                                </button>
+
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+            <div page-model="@Model.PagingInfo" page-action="Update" page-classes-enabled="true"
+                 page-class="btn border" page-class-normal="btn btn-default active"
+                 page-class-selected="btn btn-primary active" class="btn-group m-1"></div>
+            <br />
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+            </div>
+        </form>
+
+    </div>
+
+@section Scripts{
+    <script>
+$(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });</script>
+}
