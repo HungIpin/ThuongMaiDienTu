@@ -52,6 +52,5 @@ namespace QuanLyBanGiayASP.TagHelpers
             }
             output.Content.AppendHtml(result.InnerHtml);
         }
-
     }
 }

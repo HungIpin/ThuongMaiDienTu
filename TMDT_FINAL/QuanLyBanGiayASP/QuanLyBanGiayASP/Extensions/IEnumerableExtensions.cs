@@ -29,6 +29,17 @@ namespace QuanLyBanGiayASP.Extensions
                        Selected = item.GetPropertyValue("ID").Equals(selectedValue.ToString())
                    };
         }
+        public static IEnumerable<SelectListItem> ToSelectListItemTypeProduct<T>(this IEnumerable<T> items, int selectedValue)
+        {
+            return from item in items
+                   select new SelectListItem
+                   {
+                       Text = item.GetPropertyValue("TypePro"),
+                       Value = item.GetPropertyValue("ID"),
+                       Selected = item.GetPropertyValue("ID").Equals(selectedValue.ToString())
+                   };
+        }
+      
         public static IEnumerable<SelectListItem> ToSelectListItemString<T>(this IEnumerable<T> items, string selectedValue)
         {
             if (selectedValue == null)

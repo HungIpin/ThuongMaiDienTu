@@ -130,7 +130,7 @@ namespace QuanLyBanGiayASP.Areas.Admin.Controllers
             var productList = (IEnumerable<Products>)(from p in _db.Products
                                                       join a in _db.OrderItems
                                                       on p.ID equals a.ProductID
-                                                      where a.OrderID == id
+                                                      where a.OrderID == id 
                                                       select p).Include("Merchants").Include("Brands");
 
             OrderDetailViewModels objOrderVM = new OrderDetailViewModels()

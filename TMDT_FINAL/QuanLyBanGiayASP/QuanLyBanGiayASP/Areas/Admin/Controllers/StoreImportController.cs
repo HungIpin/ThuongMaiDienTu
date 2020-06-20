@@ -40,6 +40,7 @@ namespace QuanLyBanGiayASP.Areas.Admin.Controllers
                 Merchants = _db.Merchants.ToList(),
                 ListProducts = new List<Models.Products>(),
                 Brands = _db.Brands.ToList(),
+                TypeProducts = _db.TypeProducts.ToList(),
             };
         }
         public async Task<IActionResult> Index()
@@ -247,6 +248,7 @@ namespace QuanLyBanGiayASP.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            HttpContext.Session.SetString("oldAmount", StoreImportVM.Products.InStock.ToString());
 
             return View(StoreImportVM);
         }
@@ -263,11 +265,15 @@ namespace QuanLyBanGiayASP.Areas.Admin.Controllers
                 int intock = productFromDb.InStock;
                 productFromDb.InStock = StoreImportVM.Products.InStock;
                 int idpro = productFromDb.ID;
+                int count = productFromDb.InStock;
                 await _db.SaveChangesAsync();
+
+                int old = Int32.Parse(HttpContext.Session.GetString("oldAmount"));
 
                 var proc = _db.Products.Where(a => a.ID == idpro).FirstOrDefault();
                 ImportDetails import = StoreImportVM.ImportDetails;
                 import.ProductId = idpro;
+                import.AmountProduct = count-old;
                 _db.ImportDetails.Add(import);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Update));

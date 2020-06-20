@@ -331,6 +331,9 @@ namespace QuanLyBanGiayASP.Data.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
+                    b.Property<double>("tongtien")
+                        .HasColumnType("float");
+
                     b.HasKey("ID");
 
                     b.HasIndex("OrderID");
@@ -404,13 +407,33 @@ namespace QuanLyBanGiayASP.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int?>("TypeProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("BrandId");
 
                     b.HasIndex("MerchantId");
 
+                    b.HasIndex("TypeProductId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("QuanLyBanGiayASP.Models.TypeProduct", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TypePro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TypeProducts");
                 });
 
             modelBuilder.Entity("QuanLyBanGiayASP.Models.ApplicationUser", b =>
@@ -524,6 +547,10 @@ namespace QuanLyBanGiayASP.Data.Migrations
                         .HasForeignKey("MerchantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("QuanLyBanGiayASP.Models.TypeProduct", "TypeProduct")
+                        .WithMany()
+                        .HasForeignKey("TypeProductId");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,5 +13,6 @@ namespace QuanLyBanGiayASP.Models.ViewModels
         public IEnumerable<Merchants> Merchants { get; set; }
         public IEnumerable<Brands> Brands { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public IEnumerable<TypeProduct> TypeProducts { get; set; }
     }
 }

@@ -12,6 +12,7 @@ using QuanLyBanGiayASP.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc;
 
 namespace QuanLyBanGiayASP
 {
@@ -38,6 +39,9 @@ namespace QuanLyBanGiayASP
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.

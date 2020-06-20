@@ -1,5 +1,11 @@
 ﻿@using QuanLyBanGiayASP.Utility;
-@model List<QuanLyBanGiayASP.Models.Products>
+@model QuanLyBanGiayASP.Models.ViewModels.ShopViewModels
+@using Microsoft.AspNetCore.Http;
+@using QuanLyBanGiayASP.Extensions;
+@using QuanLyBanGiayASP.Models.ViewModels;
+@inject IHttpContextAccessor HttpContextAccessor
+
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -142,7 +148,7 @@
                     <div class="h-100 d-flex align-items-center justify-content-end">
                         <div class="cta--text">
                             <h2>Global Shoes</h2>
-                            <a asp-area="Customer" asp-action="Index" asp-controller="Shop"class="btn essence-btn">Buy Now</a>
+                            <a asp-area="Customer" asp-action="Index" asp-controller="Shop" class="btn essence-btn">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -162,46 +168,76 @@
             </div>
         </div>
     </div>
-
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="popular-products-slides owl-carousel">
+        <div class="col-12">
+            <div class="popular-products-slides owl-carousel">
 
-                    @foreach (var product in Model)
-                    {
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="@product.Image" alt="">
-                                <!-- Hover Thumb -->
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>topshop</span>
-
-                                <h5>@product.Name</h5>
-                                <p class="product-price">$@product.Price</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content" style="text-align:center">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn" style="text-align:center">
-                                        <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="btn essence-btn  style=" text-align:center"">
-                                            SHOP NOW
-                                            <i class="fa fa-chevron-right "></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                @foreach (var product in Model.Products)
+                {
+                    <!-- Single Product -->
+                    <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img">
+                            <img src="@product.Image" alt="">
+                            <!-- Hover Thumb -->
                         </div>
-                    }
+                        <!-- Product Description -->
+                        <div class="product-description">
+                            <span>@product.Brands.Name</span>
 
-                </div>
+                            <h5>@product.Name</h5>
+                            <p class="product-pri
+                                                   ce">$@product.Price</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content" style="text-align:center">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn" style="text-align:center">
+                                                        <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="btn essence-btn  style=" text-align:center"">
+                                                            SHOP NOW
+                                                            <i class="fa fa-chevron-right "></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
             </div>
         </div>
     </div>
+
+    @*<div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="popular-products-slides owl-carousel">
+
+                        @foreach (var product in Model)
+                        {
+                            <div class="single-product-wrapper">
+                                <div class="product-img">
+                                    <img src="@product.Image" alt="">
+                                </div>
+                                <div class="product-description">
+
+                                    <span>@product.Brands.Name</span>
+                                    <h5>@product.Name</h5>
+                                    <p class="product-price">$@product.Price</p>
+                                    <div class="hover-content" style="text-align:center">
+                                        <div class="add-to-cart-btn" style="text-align:center">
+                                            <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="btn essence-btn  style=" text-align:center"">
+                                                SHOP NOW
+                                                <i class="fa fa-chevron-right "></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
 </section>
 
 

@@ -17,16 +17,20 @@
             </div>
         </div>
     </div>
-    <div class="row" style="padding:20px;" class="container">
-        <div class="col-2">
-            Customer Name
+    <div class="container">
+        <div class="row" style="padding:20px;">
+            <div class="col-3">
+                Customer Name
+            </div>
+            <div class="col-6">
+                @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-3">
+                <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
         </div>
-        <div class="col-3">
-            @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
-            <i class="fas fa-search"></i> Search
-        </button>
     </div>
 
 
@@ -43,28 +47,45 @@
 
 
                             <!-- ##### Single Widget ##### -->
-                            <div class="widget brands mb-50">
-                                <!-- Widget Title 2 -->
-                                <a asp-action="Index">All</a>
-                                <p class="widget-title2 mb-30">Brands</p>
-                                @{
-                                    foreach (var brands in Model.Brands)
-                                    {
-                                        <div class="widget-desc">
-                                            <ul>
-                                                @{
-                                                    //Search theo Brand ID ứng với tên Brand tương ứng
+                                    <div class="widget brands mb-50">
+                                        <!-- Widget Title 2 -->
+                                        <a asp-action="Index">All</a>
+                                        <p class="widget-title2 mb-30">Brands</p>
+                                        @{
+                                            foreach (var brands in Model.Brands)
+                                            {
+                                                <div class="widget-desc">
+                                                    <ul>
+                                                        @{
+                                                            //Search theo Brand ID ứng với tên Brand tương ứng
 
-                                                    <li><a asp-action="Search" asp-route-id="@brands.ID">@brands.Name</a></li>
+                                                            <li><a asp-action="Search" asp-route-id="@brands.ID">@brands.Name</a></li>
 
-                                                }
-                                            </ul>
-                                        </div>
-                                    }
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
 
-                                }
+                                        }
+                                        <p class="widget-title2 mb-30">Type</p>
+                                        @{
+                                            foreach (var typeProducts in Model.typeProducts)
+                                            {
+                                                <div class="widget-desc">
+                                                    <ul>
+                                                        @{
+                                                            //Search theo Brand ID ứng với tên Brand tương ứng
 
-                            </div>
+                                                            <li><a asp-action="Search" asp-route-id="@typeProducts.ID">@typeProducts.TypePro</a></li>
+
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+
+                                        }
+
+                                    </div>
                         </div>
                     </div>
 
@@ -126,8 +147,6 @@
             </div>
         }
     </form>
-
-        @*</section>
             <div class="container">
                 <div class="row">
                     @foreach (var product in Model.Products)
@@ -161,4 +180,4 @@
 
                     }
                 </div>
-            </div>*@
+            </div>

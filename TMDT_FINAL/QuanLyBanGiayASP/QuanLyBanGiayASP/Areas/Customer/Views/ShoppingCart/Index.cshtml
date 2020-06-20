@@ -45,53 +45,53 @@
                             </tr>
                             @foreach (var item in Model.Products)
                             {
-                                <tr style="padding:50px;">
-                                    <td>
-                                        <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.ID">
-                                            <img src="@item.Image" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9;" />
-                                        </a>
-                                    </td>
-                                    <td style="text-align:center">
-                                        @Html.DisplayFor(c => item.Name)
-                                    </td>
-                                    <td style="text-align:center">
-                                        @Html.DisplayFor(c => item.Price)
-                                    </td>
-                                    <td style="text-align:center">
-                                        @Html.DisplayFor(c => item.Description)
-                                    </td>
-                                    <td style="text-align:center">
-                                        @Html.DisplayFor(c => item.Merchants.Name_merchant)
-                                    </td>
-                                    <td style="text-align:center">
-                                        @Html.DisplayFor(c => item.Brands.Name)
-                                    </td>
-                                    <td style="text-align:left">
+                        <tr style="padding:50px;">
+                            <td>
+                                <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.ID">
+                                    <img src="@item.Image" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9;" />
+                                </a>
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(c => item.Name)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(c => item.Price)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(c => item.Description)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(c => item.Merchants.Name_merchant)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(c => item.Brands.Name)
+                            </td>
+                            <td style="text-align:left">
 
-                                        @{
-                                            List<Amount_Product> gioHang = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
-                                            if (gioHang != null)
+                                @{
+                                    List<Amount_Product> gioHang = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
+                                    if (gioHang != null)
+                                    {
+                                        @foreach (Amount_Product product in gioHang)
+                                        {
+                                            @if (product.IDProduct == item.ID)
                                             {
-                                                @foreach (Amount_Product product in gioHang)
-                                                {
-                                                    @if (product.IDProduct == item.ID)
-                                                    {
-                                                        @Html.DisplayFor(i => product.Amount)
-                                                        tong = tong + item.Price * product.Amount;
-                                                        break;
-                                                    }
-                                                }
+                                                @Html.DisplayFor(i => product.Amount)
+                                                tong = tong + item.Price * product.Amount;
+                                                break;
                                             }
                                         }
+                                    }
+                                }
 
-                                    </td>
-                                    <td style="text-align:center">
-                                        <button type="submit" class="btn btn-danger form-control" asp-action="remove" asp-route-id="@item.ID">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
+                            </td>
+                            <td style="text-align:center">
+                                <button type="submit" class="btn btn-danger form-control" asp-action="remove" asp-route-id="@item.ID">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
 
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
                             }
                         </table>
                     </div>
@@ -135,14 +135,26 @@
                                 <input asp-for="@Model.Orders.Time" value="" type="text" class="timepicker form-control" />
                             </div>
                             <div class="col-12">
+                               <label>Adress</label>
+                            </div>
+                            <div class="col-12" style="padding-bottom:15px">
+                                <input asp-for="@Model.Orders.Address" value="" type="text" class="form-control" />
+                            </div>
+
+
+                            <div class="col-12">
                                 <label>TongTien</label>
                             </div>
                             <div class="col-12" style="padding-bottom:15px">
                                 <input value="@tong" type="text" class="form-control" />
                             </div>
                             <div class="col-12">
-                                <button type="submit" id="btnPlaceOrder" class="btn btn-success">Schedule Appointment</button>
+                                <button type="submit" id="btnPlaceOrder" class="btn btn-success" style="height:50px;width:200px">Schedule Appointment</button>
                             </div>
+
+                            @*<div>
+                                <a asp-action="PaymentWithPaypal" asp-controller="Paypal" class="btn btn-success">Thanh toán bằng paypal</a>
+                            </div>*@
                         </div>
                     </div>
                 </div>

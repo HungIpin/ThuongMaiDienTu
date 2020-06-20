@@ -15,10 +15,10 @@ namespace QuanLyBanGiayASP.Models
         [NotMapped]
         public DateTime Time { get; set; }
         public bool isConfirmed { get; set; }
-        public string Address { get; set; }
 
         [Display(Name = "Sales Person")]
         public string SalesPersonId { get; set; }
+        public string Address { get; set; }
 
         [ForeignKey("SalesPersonId")]
         public virtual ApplicationUser SalerPerson { get; set; }

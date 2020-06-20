@@ -1,4 +1,9 @@
 ﻿@model QuanLyBanGiayASP.Models.ViewModels.OrderDetailViewModels
+@inject IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Http;
+@using QuanLyBanGiayASP.Extensions;
+@using QuanLyBanGiayASP.Utility;
+@using QuanLyBanGiayASP.Models.ViewModels;
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -26,6 +31,9 @@
             <th style="text-align:center;">
                 <label>Amount</label>
             </th>
+            @*<th style="text-align:center;">
+                    <label>Thanh Tien</label>
+                </th>*@
             <th style="text-align:center;"></th>
         </tr>
         @foreach (var item in Model.Products)
@@ -52,12 +60,12 @@
                     @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.Amount).FirstOrDefault()
                 </td>
                 @*<td style="text-align:center">
-                    @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault()
-                    @{
+                        @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault()
+                        @{
 
-                        tong = tong + Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault();
-                    }
-                </td>*@
+                            tong = tong + Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault();
+                        }
+                    </td>*@
 
                 <td style="text-align:center">
                 </td>
@@ -66,7 +74,11 @@
 
         }
     </table>
-    <h1>@tong</h1>
+    <h4 style="padding-left:800px">Total cost:@tong</h4>
+    <div>
+        <a style="padding-left:800px" asp-action="PaymentWithPaypal" asp-controller="Paypal" class="btn btn-success">Thanh toán bằng paypal</a>
+    </div>
+
 }
 else
 {

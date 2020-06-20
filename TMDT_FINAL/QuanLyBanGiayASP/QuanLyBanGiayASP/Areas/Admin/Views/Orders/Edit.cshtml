@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Order.Customers.Email" ></label>
+                        <label asp-for="Order.Customers.Email"></label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Order.Customers.Email" class="form-control" />
@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Order.Date" ></label>
+                        <label asp-for="Order.Date"></label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Order.Date" id="datepicker" type="text" class="form-control" />
@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Order.Time" ></label>
+                        <label asp-for="Order.Time"></label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Order.Time" id="timepicker" type="text" class="timepicker form-control" />
@@ -52,16 +52,17 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Order.Customers.Phone" ></label>
+                        <label asp-for="Order.Customers.Phone"></label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Order.Customers.Phone" class="form-control" />
                     </div>
                     <span asp-validation-for="Order.Customers.Phone" class="text-danger"></span>
                 </div>
+               
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Order.SalerPerson" ></label>
+                        <label asp-for="Order.SalerPerson"></label>
                     </div>
                     <div class="col-8">
                         @if (User.IsInRole(SD.AdminEndUser))
@@ -80,7 +81,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Order.isConfirmed" ></label>
+                        <label asp-for="Order.isConfirmed"></label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Order.isConfirmed" class="form-control" />

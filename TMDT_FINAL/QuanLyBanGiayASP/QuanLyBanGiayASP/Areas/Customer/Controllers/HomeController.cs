@@ -18,18 +18,26 @@ namespace QuanLyBanGiayASP.Controllers
     {
 
         private readonly ApplicationDbContext _db;
-
+        public ShopViewModels ShopVM { get; set; }
         public HomeController(ApplicationDbContext db)
         {
             _db = db;
+            ShopVM = new ShopViewModels()
+            {
+                Products = new List<Models.Products>(),
+                Brands = new List<Models.Brands>(),
+                typeProducts = new List<Models.TypeProduct>(),
+            };
         }
 
-
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string typepro="PRO")
         {
-            var productList = await _db.Products.Include(m => m.Merchants).Include(m => m.Brands).ToListAsync();
-
-            return View(productList);
+            var productList = await _db.Products.Include(m => m.Merchants).Include(m => m.Brands).Include(m => m.TypeProduct).Where(m => m.TypeProduct.TypePro ==typepro).ToListAsync();
+            for(int i=0;i<productList.Count;i++)
+            {
+                ShopVM.Products.Add(productList[i]);
+            }
+            return View(ShopVM);
         }
         public async Task<IActionResult> Details(int id)
         {

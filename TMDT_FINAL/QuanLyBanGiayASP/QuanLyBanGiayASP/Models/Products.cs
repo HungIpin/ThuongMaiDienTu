@@ -32,8 +32,16 @@ namespace QuanLyBanGiayASP.Models
         [Display(Name = "Brand")]
         public int BrandId { get; set; }
 
+       
+
         [ForeignKey("BrandId")]
         public virtual Brands Brands { get; set; }
+
+        [Display(Name = "TypeProduct")]
+        public int TypeProductId { get; set; }
+
+        [ForeignKey("TypeProductId")]
+        public virtual TypeProduct TypeProduct { get; set; }
         public ICollection<ImportDetails> ImportDetails { get; set; }
     }
 }

@@ -64,6 +64,7 @@ namespace QuanLyBanGiayASP.Areas.Customer.Controllers
                                                             .AddHours(ShoppingCartVM.Orders.Time.Hour)
                                                             .AddMinutes(ShoppingCartVM.Orders.Time.Minute);
             //lấy id của customer ứng với đơn đặt hàng của người đó
+
             Customers customer = ShoppingCartVM.Orders.Customers;
             customer.Status = "Just Order";
             _db.Customers.Add(customer);

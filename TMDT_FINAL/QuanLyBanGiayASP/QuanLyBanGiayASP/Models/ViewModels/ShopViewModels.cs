@@ -11,5 +11,6 @@ namespace QuanLyBanGiayASP.Models.ViewModels
 
         public PagingInfo PagingInfo { get; set; }
         public List<Brands> Brands { get; set; }
+        public List<TypeProduct> typeProducts { get; set; }
     }
 }

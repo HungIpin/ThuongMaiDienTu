@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyBanGiayASP.Helper
 {
-    public class PaypalConfig
+    public class PayPalConfig
     {
         public string PayPalMode { get; set; }
         public string PayPalConnectionTimeout { get; set; }
@@ -21,6 +21,7 @@ namespace QuanLyBanGiayASP.Helper
             config.Add("requestEntries", PayPalRequestEntries);
             config.Add("clientId", PayPalClientId);
             config.Add("clientSecret", PayPalClientSecret);
+
             return config;
         }
     }

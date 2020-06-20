@@ -87,7 +87,9 @@
                               Available
                           </th>
                           <th>
+                              Address
                           </th>
+                          <th></th>
                           <th></th>
                       </tr>
                       @foreach (var item in Model.Orders)
@@ -112,6 +114,9 @@
                               </td>
                               <td>
                                   @Html.DisplayFor(m => item.isConfirmed)
+                              </td>
+                              <td>
+                                  @Html.DisplayFor(m=>item.Address)
                               </td>
                               <td>
                                   <partial name="_TableButtonPartial" model="item.ID" />

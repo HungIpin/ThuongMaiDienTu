@@ -26,9 +26,49 @@ namespace QuanLyBanGiayASP.Areas.Customer.Controllers
             ShopVM = new ShopViewModels()
             {
                 Products = new List<Models.Products>(),
-                Brands = new List<Models.Brands>()
+                Brands = new List<Models.Brands>(),
+                typeProducts= new List<Models.TypeProduct>(),
             };
         }
+        //public async Task<IActionResult> best(string searchName = "PRO")
+        //{
+        //    System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+        //    var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+        //    var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        //    StringBuilder param = new StringBuilder();
+
+
+        //    param.Append("&searchName=");
+
+        //    if (searchName != null)
+        //    {
+        //        param.Append(searchName);
+        //    }
+
+
+        //    int count = 0;
+        //    var productList = await _db.Products.Include(m => m.Merchants).Include(m => m.Brands).ToListAsync();
+        //    var brandlist = await _db.Brands.ToListAsync();
+
+
+        //    if (searchName != null)
+        //    {
+        //        productList = await _db.Products.Include(m => m.Merchants).Include(m => m.Brands).Where(a => a.TypeProduct.TypePro.Contains(searchName.ToLower())).ToListAsync();
+
+        //        for (int i = 0; i < productList.Count; i++)
+        //        {
+        //            ShopVM.Products.Add(productList[i]);
+        //            count++;
+        //        }
+        //    }
+        //    for (int i = 0; i < brandlist.Count; i++)
+        //    {
+        //        ShopVM.Brands.Add(brandlist[i]);
+        //    }
+        //    HttpContext.Session.Set("ssAmount", count);
+
+        //    return View(ShopVM);
+        //}
 
         public async Task<IActionResult> Index( string searchName = null)
         {
@@ -49,6 +89,7 @@ namespace QuanLyBanGiayASP.Areas.Customer.Controllers
             int count = 0;
             var productList = await _db.Products.Include(m => m.Merchants).Include(m => m.Brands).ToListAsync();
             var brandlist = await _db.Brands.ToListAsync();
+            var typeProduct = await _db.TypeProducts.ToListAsync();
 
 
             if (searchName != null)
@@ -75,15 +116,22 @@ namespace QuanLyBanGiayASP.Areas.Customer.Controllers
             {
                 ShopVM.Brands.Add(brandlist[i]);
             }
+            for (int i = 0; i < typeProduct.Count; i++)
+            {
+                ShopVM.typeProducts.Add(typeProduct[i]);
+            }
             HttpContext.Session.Set("ssAmount", count);
             
             return View(ShopVM);
         }
         public async Task<IActionResult> Search(int id)
         {
+
             int count = HttpContext.Session.Get<int>("ssAmount");
+            count = 0;
             var productList = _db.Products.Include(m => m.Merchants).Include(m => m.Brands).Where(a => a.BrandId == id).ToList();
             var brandlist = _db.Brands.ToList();
+            var typeProduct = _db.TypeProducts.ToList();
             for (int i = 0; i < productList.Count; i++)
             {
                 ShopVM.Products.Add(productList[i]);
@@ -92,6 +140,10 @@ namespace QuanLyBanGiayASP.Areas.Customer.Controllers
             for (int i = 0; i < brandlist.Count; i++)
             {
                 ShopVM.Brands.Add(brandlist[i]);
+            }
+            for (int i = 0; i < typeProduct.Count; i++)
+            {
+                ShopVM.typeProducts.Add(typeProduct[i]);
             }
             HttpContext.Session.Set("ssAmount", count);
             return View(ShopVM);

@@ -16,6 +16,7 @@
         </div>
     </div>
 </div>
+
 <!-- ##### Breadcumb Area End ##### -->
 <!-- ##### Shop Grid Area Start ##### -->
 <section class="shop_grid_area section-padding-80">
@@ -28,28 +29,48 @@
 
 
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget brands mb-50">
-                            <!-- Widget Title 2 -->
-                            <a asp-action="Index">All</a>
-                            <p class="widget-title2 mb-30">Brands</p>
-                            @{
-                                foreach (var brands in Model.Brands)
-                                {
-                                    <div class="widget-desc">
-                                        <ul>
-                                            @{
-                                                //Search theo Brand ID ứng với tên Brand tương ứng
+                            <div class="widget brands mb-50">
+                                <!-- Widget Title 2 -->
+                                <a asp-action="Index">All</a>
+                                <p class="widget-title2 mb-30">Brands</p>
+                                @{
+                                    foreach (var brands in Model.Brands)
+                                    {
+                                        <div class="widget-desc">
+                                            <ul>
+                                                @{
+                                                    //Search theo Brand ID ứng với tên Brand tương ứng
 
-                                                <li><a asp-action="Search" asp-route-id="@brands.ID">@brands.Name</a></li>
-                                                
-                                            }
-                                        </ul>
-                                    </div>
+                                                    <li><a asp-action="Search" asp-route-id="@brands.ID">@brands.Name</a></li>
+
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+
                                 }
+                                @{
+                                    <p class="widget-title2 mb-30">Type</p>
+                                    
+                                        foreach (var typeProducts in Model.typeProducts)
+                                        {
+                                            <div class="widget-desc">
+                                                <ul>
+                                                    @{
+                                                        //Search theo Brand ID ứng với tên Brand tương ứng
 
-                            }
+                                                        <li><a asp-action="Search" asp-route-id="@typeProducts.ID">@typeProducts.TypePro</a></li>
 
-                        </div>
+                                                    }
+                                                </ul>
+                                            </div>
+                                                        }
+
+                                }
+                                
+
+
+                            </div>
                     </div>
                 </div>
 
