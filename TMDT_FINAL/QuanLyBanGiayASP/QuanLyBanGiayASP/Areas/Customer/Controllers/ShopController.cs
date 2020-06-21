@@ -121,15 +121,56 @@ namespace QuanLyBanGiayASP.Areas.Customer.Controllers
                 ShopVM.typeProducts.Add(typeProduct[i]);
             }
             HttpContext.Session.Set("ssAmount", count);
-            
+
             return View(ShopVM);
+            //return RedirectToAction("Index", "ssAmount");
+
         }
+        public async Task<IActionResult> SearchIndex(String searchName )
+        {
+
+            var list = from m in _db.Products
+                       select m;
+            if(searchName!=null)
+            {
+                list = list.Where(s => s.Name.Contains(searchName));
+            }
+            return View(await list.ToListAsync());
+
+        }
+
         public async Task<IActionResult> Search(int id)
         {
 
             int count = HttpContext.Session.Get<int>("ssAmount");
             count = 0;
             var productList = _db.Products.Include(m => m.Merchants).Include(m => m.Brands).Where(a => a.BrandId == id).ToList();
+            var brandlist = _db.Brands.ToList();
+            var typeProduct = _db.TypeProducts.ToList();
+            for (int i = 0; i < productList.Count; i++)
+            {
+                ShopVM.Products.Add(productList[i]);
+                count++;
+            }
+            for (int i = 0; i < brandlist.Count; i++)
+            {
+                ShopVM.Brands.Add(brandlist[i]);
+            }
+            for (int i = 0; i < typeProduct.Count; i++)
+            {
+                ShopVM.typeProducts.Add(typeProduct[i]);
+            }
+            HttpContext.Session.Set("ssAmount", count);
+            return View(ShopVM);
+
+        }
+
+        public async Task<IActionResult> SearchType(int id)
+        {
+
+            int count = HttpContext.Session.Get<int>("ssAmount");
+            count = 0;
+            var productList = _db.Products.Include(m => m.Merchants).Include(m => m.Brands).Include(m=>m.TypeProduct).Where(m=>m.TypeProduct.ID == id).ToList();
             var brandlist = _db.Brands.ToList();
             var typeProduct = _db.TypeProducts.ToList();
             for (int i = 0; i < productList.Count; i++)

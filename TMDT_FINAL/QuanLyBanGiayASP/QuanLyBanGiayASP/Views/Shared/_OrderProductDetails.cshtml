@@ -9,78 +9,73 @@
 *@
 @{
     double tong = 0;
+    int dem = 1;
 }
-@if (Model.Products.Count > 0)
-{
-    <table class="table table-striped" width="100%">
-        <tr class="table-info">
-            <th style="text-align:center; width:20%"></th>
+    <div class="container">
+        <div class="row">
 
-            <th style="text-align:center;">
-                <label asp-for="@Model.Products.FirstOrDefault().Name"></label>
-            </th>
-            <th style="text-align:center;">
-                <label asp-for="@Model.Products.FirstOrDefault().Price"></label>
-            </th>
-            <th style="text-align:center;">
-                <label asp-for="@Model.Products.FirstOrDefault().Brands.Name"></label>
-            </th>
-            <th style="text-align:center;">
-                <label asp-for="@Model.Products.FirstOrDefault().Merchants.Name_merchant"></label>
-            </th>
-            <th style="text-align:center;">
-                <label>Amount</label>
-            </th>
-            @*<th style="text-align:center;">
-                    <label>Thanh Tien</label>
-                </th>*@
-            <th style="text-align:center;"></th>
-        </tr>
-        @foreach (var item in Model.Products)
-        {
-            <tr style="padding:50px;">
-                <td>
-                    <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.ID">
-                        <img src="@item.Image" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9;" />
-                    </a>
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(c => item.Name)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(c => item.Price)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(c => item.Brands.Name)
-                </td>
-                <td style="text-align:center">
-                    @Html.DisplayFor(c => item.Merchants.Name_merchant)
-                </td>
-                <td style="text-align:center">
-                    @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.Amount).FirstOrDefault()
-                </td>
-                @*<td style="text-align:center">
-                        @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault()
-                        @{
+            @if (Model.Products.Count > 0)
+            {
+               
+                    <table class="table table-striped" width="100%" style="border:0.4px solid black">
+                        <tr class="table-info">
+                            @*<th style="text-align:center; width:20%"></th>*@
+                            <th style="text-align:center;">
+                                <label>STT</label>
+                            </th>
+                            <th style="text-align:center;">
+                                <label asp-for="@Model.Products.FirstOrDefault().Name"></label>
+                            </th>
+                            <th style="text-align:center;">
+                                <label asp-for="@Model.Products.FirstOrDefault().Price"></label>
+                            </th>
+                            <th style="text-align:center;">
+                                <label>Amount</label>
+                            </th>
+                            <th style="text-align:center;">
+                                <label>Thanh Tien</label>
+                            </th>
+                            <th style="text-align:center;"></th>
+                        </tr>
+                        @foreach (var item in Model.Products)
+                        {
 
-                            tong = tong + Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault();
+                            <tr style="padding:50px;">
+                                <td style="text-align:center">
+                                    @dem
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(c => item.Name)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(c => item.Price)
+                                </td>
+                                <td style="text-align:center">
+                                    @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.Amount).FirstOrDefault()
+                                </td>
+                                <td style="text-align:center">
+                                    @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault()
+                                    @{
+
+                                        tong = tong + Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault();
+                                    }
+                                </td>
+
+
+                                <td style="text-align:center">
+                                </td>
+
+                            </tr>
+                            dem += 1;
                         }
-                    </td>*@
-
-                <td style="text-align:center">
-                </td>
-
-            </tr>
-
-        }
-    </table>
-    <h4 style="padding-left:800px">Total cost:@tong</h4>
-    <div>
-        <a style="padding-left:800px" asp-action="PaymentWithPaypal" asp-controller="Paypal" class="btn btn-success">Thanh toán bằng paypal</a>
+                    </table>
+                    <button>Thanh Toán</button>
+                <div style="padding-left:100px" class="nav-link">Total cost:@tong</div>
+            }
+            else
+            {
+            <div>No items added to the shopping cart...</div>
+            }
+        </div>
     </div>
 
-}
-else
-{
-    <div>No items added to the shopping cart...</div>
-}

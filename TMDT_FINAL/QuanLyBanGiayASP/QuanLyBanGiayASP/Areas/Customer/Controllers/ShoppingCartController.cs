@@ -115,7 +115,7 @@ namespace QuanLyBanGiayASP.Areas.Customer.Controllers
         {
             List<Amount_Product> lstCartItems = HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
 
-            if (lstCartItems.Count > 0)
+            if (lstCartItems.Count >= 0)
             {
                 foreach (Amount_Product item in lstCartItems)
                 {

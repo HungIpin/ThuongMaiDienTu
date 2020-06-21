@@ -6,18 +6,24 @@
 
 <br />
 <h2 style="text-align:center">Order Confirmation</h2>
-<div class="form-text" style="text-align:center" >
+<div class="form-text" style="text-align:center">
     <p>Your appointment has been submitted. One of our awesome Sales Rep would be in touch shortly.</p>
     <p>Please feel free to contact us anytime you have any questions.</p>
 </div>
 <br />
 
-<partial name="~/Views/Shared/_OrderCustomerDetails.cshtml" model="Model.Order" />
 <br />
 <div class="container">
-    <partial name="~/Views/Shared/_OrderProductDetails.cshtml" model="Model" />
+    <div class="row">
+        <div class="col-6">
+            <partial name="~/Views/Shared/_OrderProductDetails.cshtml" model="Model" />
+        </div>
+        <div class="col-6">
+            <partial name="~/Views/Shared/_OrderCustomerDetails.cshtml" model="Model.Order" />
+        </div>
+            
+    </div>
 </div>
 
-<a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-success" style="text-align:center"> Back to Products</a>
 
 

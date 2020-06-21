@@ -1,9 +1,12 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿
+@using Microsoft.AspNetCore.Http
 @using QuanLyBanGiayASP.Extensions
 @using QuanLyBanGiayASP.Utility
 @using QuanLyBanGiayASP.Models.ViewModels
 
 @inject IHttpContextAccessor HttpContextAccessor
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,56 +69,58 @@
 
 
 <body>
-   
-    <header class="header_area" style=" background-color:white">
-        <div class="classy-nav-container breakpoint-off d-flex align-items-center ">
-            <div class="container" style="height:auto;text-align:center">
-                <div class="row">
-                    <div class="col-12 col-md-12 " style="text-align:right">
-                        <div style="text-align:right;padding:0px">
-                            <partial name="_LoginPartial" />
+  
+        <header class="header_area" style=" background-color:white">
+            <div class="classy-nav-container breakpoint-off d-flex ">
+                <div class="container" style="height:auto;">
+                    <div class="row">
+                        <div class="col-12 col-md-12 ">
+                            <div >
+                                <partial name="_LoginPartial" />
+                            </div>
                         </div>
+                    </div>
+                    <form method="get">
+                        <div class="row">
+                            <div class="col-3 col-md-2">
+                                <a class="nav-brand" style="padding-top:5px" asp-area="Customer" asp-controller="Home" asp-action="Index"><img style="width:100%" src="~/img/core-img/brand1.png" alt=""></a>
+                            </div>
+                            <div class="col-1 col-md-4">
+                            </div>
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3 col-md-2">
-                        <a class="nav-brand" style="padding-top:5px" asp-area="Customer" asp-controller="Home" asp-action="Index"><img style="width:100%" src="~/img/core-img/brand1.png" alt=""></a>
-                    </div>
-                    <div class="col-3 col-md-4">
-                    </div>
+                            <div class="col-4 col-md-4">
+                                @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <div class="col-2 col-md-1" style="padding-top:2px">
+                                <button asp-area="Customer" asp-controller="Shop" asp-action="Index" type="submit" class="fas fa-search" style="height:33px;width:100%;background-color:orange;"></button>
+                            </div>
 
-                    <div class="col-4 col-md4">
-                        <input class="form-control fa-search " type="text" placeholder="Search" aria-label="Search" style="width:100%;">
-                    </div>
-                    <div class="col-1 col-md-1" style="padding-top:2px">
-                        <button class="fas fa-search" type="submit" style="height:33px;width:100%;background-color:orange;"></button>
-                    </div>
-                    <div class="col-1 col-md-1" style="text-align:right">
-                        @if (HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart") != null)
-                        {
-                            <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                            <div class="col-2 col-md-1">
+                                @if (HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart") != null)
+                                {
+                                    <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" style="font-size:20px" class="nav-link" >
 
-                                @{
-                                    var count = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart").Count;
+                                        @{
+                                            var count = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart").Count;
+                                        }
+                                        <i class="fas fa-shopping-cart " style="margin-right:10px">(@count)</i> &nbsp;
+
+                                    </a>
+
+
                                 }
-                                <i class="fas fa-shopping-cart " style="margin-right:10px">( @count )</i> &nbsp;
-
-                            </a>
-
-
-                        }
-                        else
-                        {
-                            <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link" style="font-size:20px">
-                                <i class="fas fa-shopping-cart"></i> &nbsp;
-                            </a>
-                        }
-                    </div>
+                                else
+                                {
+                                    <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link" style="font-size:20px">
+                                        <i class="fas fa-shopping-cart"></i> &nbsp;
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                </div>
-        </div>
-    </header>
+            </div>
+        </header>
     <!-- ##### Header Area Start ##### -->
     <!-- ##### Header Area End ##### -->
     <!-- ##### Right Side Cart Area ##### -->

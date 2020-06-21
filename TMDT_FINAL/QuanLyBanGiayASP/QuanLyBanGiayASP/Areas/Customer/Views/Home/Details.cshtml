@@ -1,4 +1,4 @@
-﻿@model QuanLyBanGiayASP.Models.Products
+﻿@*@model QuanLyBanGiayASP.Models.Products
     @using QuanLyBanGiayASP.Extensions
     @using Microsoft.AspNetCore.Http
     @using QuanLyBanGiayASP.Models.ViewModels
@@ -26,31 +26,108 @@
                 }
             </div>
             <div class="col-md-6">
-                <body>
                     <div class="cart-bg-overlay"></div>
                     <section class="single_product_details_area d-flex align-items-center">
 
-                        <!-- Single Product Thumb -->
-                        <!-- Single Product Description -->
+                         Single Product Thumb
+                         Single Product Description
                         <div class="single_product_desc clearfix">
-                            <span >@Model.Brands.Name</span>
+                            <span>@Model.Brands.Name</span>
                             <a href="cart.html">
-                                <h2>One Shoulder Glitter Midi Dress</h2>
+                                <h2>@Model.Name</h2>
                             </a>
-                            <p class="product-price"><span class="old-price">$65.00</span> $49.00</p>
-                            <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+                            <p class="product-price"><span class="old-price">$65.00</span> @Model.Price $</p>
+                            <p style="width:500px" ">@Model.Description</p>
 
-                            <!-- Form -->
+                             Form
                             <form class="cart-form clearfix" method="post">
-                                <!-- Cart & Favourite Box -->
-                                <div class="cart-fav-box d-flex align-items-center">
-                                    <!-- Cart -->
-                                    <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
-                                    <!-- Favourite -->
-                                    <div class="product-favourite ml-4">
-                                        <a href="#" class="favme fa fa-heart"></a>
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <h5><label for="tanggiam" style=" padding:5px">Amount</label></h5>
+                                    </div>
+                                    <div class="col-8">
+                                        @{
+                                            // Sử dụng Spinner để tăng giảm Amount và được lưu trong list AmountProduct có tên là ssShoppingCart
+                                            // Ở đây ta sẽ kt listcart có null hay không tức là nếu như lưu trước đó rồi thì sẽ sét cái Id mới ứng với
+                                        }
+                                        @{
+                                            bool isInBag = false;
+                                            List<Amount_Product> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
+                                            if (lstCart != null)
+                                            {
+                                                foreach (Amount_Product item in lstCart)
+                                                {
+                                                    if (item.IDProduct == Model.ID)
+                                                    {
+                                                        <input asp-for="@item.Amount" style="height:50px;width:200px" class="form-control" readonly />
+                                                        isInBag = true;
+                                                    }
+                                                }
+
+                                            }
+                                            //số lượng lớn nhất của Spinner là số lượng sản phẩm đang có trong kho( sản phẩm tương)
+                                            @if (!isInBag)
+                                            {
+                                                int maxSoLuong = _db.Products.Where(s => s.ID == Model.ID).Select(s => s.InStock).FirstOrDefault();
+                                                int defaulValue = 1, minSoLuong = 1;
+                                                if (maxSoLuong == 0)
+                                                {
+                                                    minSoLuong = 0; defaulValue = 0;
+                                                }
+
+                                                <input type="number" id="tanggiam" name="Amount" value="@defaulValue" min="@minSoLuong" max="@maxSoLuong">
+
+                                            }
+                                        }
+
+
+
+                                    </div>
+                                    <div class="col-12">
+                                        @{
+                                            if (User.IsInRole(SD.Customer))
+                                            {
+                                                <div class="form-group row">
+                                                    <div class="col-4">
+
+                                                    </div>
+                                                    <div class="col-8">
+                                                        @if (isInBag)
+                                                        {
+                                                            <button type="submit" value="Remove From Bag" asp-action="remove" asp-route-id="@Model.ID" class="btn btn-danger form-control">Remove From Bag</button>
+
+                                                        }
+                                                        //Nếu còn sản phẩm sẽ xuất hiện nút addtobag
+                                                        else
+                                                        {
+                                                            @if (@Model.InStock > 0)
+                                                            {
+                                                                <button type="submit" value="Add to Bag" asp-route-id="@Model.ID" class="btn essence-btn form-control">Add To Bag</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn"> </button>
+
+                                                            }
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-group row">
+                                                    <div class="col-4">
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn">Add To Bag </button>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                     </section>
@@ -60,180 +137,306 @@
     </div>
 
 
+
     <div class="cart-bg-overlay"></div>
-    <section class="single_product_details_area d-flex align-items-center">
+        <section class="single_product_details_area d-flex align-items-center">
 
-         Single Product Thumb
-        <div class="single_product_thumb clearfix">
+             Single Product Thumb
+            <div class="single_product_thumb clearfix">
 
-            <img src="@Model.Image" width="60%" style="border-radius:5px; border:1px solid #bbb9b9; margin-left:200px" />
-            <br /><br />
-            @{
-    //nếu sản phẩm có số lượng thì sẽ xuất hiện hình instock
-             }
-            @if (Model.InStock > 0)
-            {
-                <li style="margin-left:350px"><img src="~/images/inStock.png" width="20%" /></li>
+                <img src="@Model.Image" width="60%" style="border-radius:5px; border:1px solid #bbb9b9; margin-left:200px" />
+                <br /><br />
+                @{
+        //nếu sản phẩm có số lượng thì sẽ xuất hiện hình instock
+                 }
+                @if (Model.InStock > 0)
+                {
+                    <li style="margin-left:350px"><img src="~/images/inStock.png" width="20%" /></li>
 
-            }
-        </div>
+                }
+            </div>
 
-         Single Product Description
-        <div class="single_product_desc clearfix">
-            <form method="post">
-                <div class="p-4 border rounded row">
-                    <div class="col-8">
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label asp-for="Name"></label>
-                            </div>
-                            <div class="col-8">
-                                <input asp-for="Name" class="form-control" readonly />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label asp-for="Price"></label>
-                            </div>
-                            <div class="col-8">
-                                <input asp-for="Price" class="form-control" readonly />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label asp-for="Description"></label>
-                            </div>
-                            <div class="col-8">
-                                <input asp-for="Description" class="form-control" readonly />
-                            </div>
-                        </div>
-
-                        @if (!Model.Merchants.Name_merchant.Equals("--None--"))
-                        {
+             Single Product Description
+            <div class="single_product_desc clearfix">
+                <form method="post">
+                    <div class="p-4 border rounded row">
+                        <div class="col-8">
                             <div class="form-group row">
                                 <div class="col-4">
-                                    <label asp-for="Merchants"></label>
+                                    <label asp-for="Name"></label>
                                 </div>
                                 <div class="col-8">
-                                    <input asp-for="Merchants.Name_merchant" class="form-control" readonly />
+                                    <input asp-for="Name" class="form-control" readonly />
                                 </div>
                             </div>
-                        }
-
-                        @if (!Model.Brands.Name.Equals("--None--"))
-                        {
                             <div class="form-group row">
                                 <div class="col-4">
-                                    <label asp-for="Brands"></label>
+                                    <label asp-for="Price"></label>
                                 </div>
                                 <div class="col-8">
-                                    <input asp-for="Brands.Name" class="form-control" readonly />
+                                    <input asp-for="Price" class="form-control" readonly />
                                 </div>
                             </div>
-                        }
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label for="tanggiam">Amount</label>
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label asp-for="Description"></label>
+                                </div>
+                                <div class="col-8">
+                                    <input asp-for="Description" class="form-control" readonly />
+                                </div>
                             </div>
-                            <div class="col-8">
-                                @{
-                                    // Sử dụng Spinner để tăng giảm Amount và được lưu trong list AmountProduct có tên là ssShoppingCart
-                                    // Ở đây ta sẽ kt listcart có null hay không tức là nếu như lưu trước đó rồi thì sẽ sét cái Id mới ứng với
-                                }
-                                @{
-                                    bool isInBag = false;
-                                    List<Amount_Product> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
-                                    if (lstCart != null)
-                                    {
-                                        foreach (Amount_Product item in lstCart)
-                                        {
-                                            if (item.IDProduct == Model.ID)
-                                            {
-                                                <input asp-for="@item.Amount" class="form-control" readonly />
-                                                isInBag = true;
-                                            }
-                                        }
 
-                                    }
-                                    //số lượng lớn nhất của Spinner là số lượng sản phẩm đang có trong kho( sản phẩm tương)
-                                    @if (!isInBag)
-                                    {
-                                        int maxSoLuong = _db.Products.Where(s => s.ID == Model.ID).Select(s => s.InStock).FirstOrDefault();
-                                        int defaulValue = 1, minSoLuong = 1;
-                                        if (maxSoLuong == 0)
-                                        {
-                                            minSoLuong = 0; defaulValue = 0;
-                                        }
-
-                                        <input type="number" id="tanggiam" name="Amount" value="@defaulValue" min="@minSoLuong" max="@maxSoLuong">
-
-                                    }
-
-                                }
-
-
-
-                            </div>
-                        </div>
-                        @{
-                            if (User.IsInRole(SD.Customer))
+                            @if (!Model.Merchants.Name_merchant.Equals("--None--"))
                             {
                                 <div class="form-group row">
                                     <div class="col-4">
-
+                                        <label asp-for="Merchants"></label>
                                     </div>
                                     <div class="col-8">
-                                        @if (isInBag)
+                                        <input asp-for="Merchants.Name_merchant" class="form-control" readonly />
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!Model.Brands.Name.Equals("--None--"))
+                            {
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label asp-for="Brands"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="Brands.Name" class="form-control" readonly />
+                                    </div>
+                                </div>
+                            }
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label for="tanggiam">Amount</label>
+                                </div>
+                                <div class="col-8">
+                                    @{
+                                        // Sử dụng Spinner để tăng giảm Amount và được lưu trong list AmountProduct có tên là ssShoppingCart
+                                        // Ở đây ta sẽ kt listcart có null hay không tức là nếu như lưu trước đó rồi thì sẽ sét cái Id mới ứng với
+                                    }
+                                    @{
+                                        bool isInBag = false;
+                                        List<Amount_Product> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
+                                        if (lstCart != null)
                                         {
-                                            <button type="submit" value="Remove From Bag" asp-action="remove" asp-route-id="@Model.ID" class="btn btn-danger form-control">Remove From Bag</button>
+                                            foreach (Amount_Product item in lstCart)
+                                            {
+                                                if (item.IDProduct == Model.ID)
+                                                {
+                                                    <input asp-for="@item.Amount" class="form-control" readonly />
+                                                    isInBag = true;
+                                                }
+                                            }
 
                                         }
-                                        //Nếu còn sản phẩm sẽ xuất hiện nút addtobag
-                                        else
+                                        //số lượng lớn nhất của Spinner là số lượng sản phẩm đang có trong kho( sản phẩm tương)
+                                        @if (!isInBag)
                                         {
-                                            @if (@Model.InStock > 0)
+                                            int maxSoLuong = _db.Products.Where(s => s.ID == Model.ID).Select(s => s.InStock).FirstOrDefault();
+                                            int defaulValue = 1, minSoLuong = 1;
+                                            if (maxSoLuong == 0)
                                             {
-                                                <button type="submit" value="Add to Bag" asp-route-id="@Model.ID" class="btn essence-btn form-control">Add To Bag</button>
+                                                minSoLuong = 0; defaulValue = 0;
                                             }
+
+                                            <input type="number" id="tanggiam" name="Amount" value="@defaulValue" min="@minSoLuong" max="@maxSoLuong">
+
+                                        }
+
+                                    }
+
+
+
+                                </div>
+                            </div>
+                            @{
+                                if (User.IsInRole(SD.Customer))
+                                {
+                                    <div class="form-group row">
+                                        <div class="col-4">
+
+                                        </div>
+                                        <div class="col-8">
+                                            @if (isInBag)
+                                            {
+                                                <button type="submit" value="Remove From Bag" asp-action="remove" asp-route-id="@Model.ID" class="btn btn-danger form-control">Remove From Bag</button>
+
+                                            }
+                                            //Nếu còn sản phẩm sẽ xuất hiện nút addtobag
                                             else
                                             {
-                                                <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn"> </button>
+                                                @if (@Model.InStock > 0)
+                                                {
+                                                    <button type="submit" value="Add to Bag" asp-route-id="@Model.ID" class="btn essence-btn form-control">Add To Bag</button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn"> </button>
+
+                                                }
+
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group row">
+                                        <div class="col-4">
+                                        </div>
+                                        <div class="col-8">
+                                            <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn">Add To Bag </button>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                            <div class="col-1">
+
+                            </div>
+                            <br />
+
+                        </div>
+                        <div class="form-group">
+                            <input hidden asp-for="ID" />
+                            <a asp-area="Customer" asp-controller="Shop" asp-action="Index" class="btn btn-success">Back to List</a>
+                        </div>
+                    </form>
+
+
+                </div>
+            </section>*@
+
+
+
+@model QuanLyBanGiayASP.Models.Products
+@using QuanLyBanGiayASP.Extensions
+@using Microsoft.AspNetCore.Http
+@using QuanLyBanGiayASP.Models.ViewModels
+@using QuanLyBanGiayASP.Data;
+@using QuanLyBanGiayASP.Utility
+
+@inject ApplicationDbContext _db
+@inject IHttpContextAccessor HttpContextAccessor
+<div class="cart-bg-overlay"></div>
+<section class="single_product_details_area d-flex align-items-center">
+
+
+    <div class="container" style="padding-top:50px;padding-bottom:50px;">
+
+        <div class="row">
+            <div class=" col-md-6" >
+                <img src="@Model.Image" /> <br /><br />
+                @{
+                    //nếu sản phẩm có số lượng thì sẽ xuất hiện hình instock
+                }
+                @*@if (Model.InStock > 0)
+                {
+                    <div style="margin-left:350px"><img src="~/images/inStock.png" width="20%" /></div>
+
+                }*@
+            </div>
+            <div class=" col-md-6">
+                <div class="single_product_desc clearfix">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-8">
+                                <span>@Model.Brands.Name</span>
+                                <h2>@Model.Name</h2>
+                                <div hidden></div>
+                                <p class="product-price"><span class="old-price">$65.00</span> @Model.Price $</p>
+
+                                <p style="width:500px">@Model.Description</p>
+                                @*@if (!Model.Merchants.Name_merchant.Equals("--None--"))
+            {
+                <input asp-for="Merchants.Name_merchant" class="form-control" readonly />
+            }*@
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label for="tanggiam">Amount</label>
+                                    </div>
+                                    <div class="col-4">
+                                        @{
+                                            bool isInBag = false;
+                                            List<Amount_Product> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
+                                            if (lstCart != null)
+                                            {
+                                                foreach (Amount_Product item in lstCart)
+                                                {
+                                                    if (item.IDProduct == Model.ID)
+                                                    {
+                                                        <input asp-for="@item.Amount" class="form-control" readonly />
+                                                        isInBag = true;
+                                                    }
+                                                }
+
+                                            }
+                                            //số lượng lớn nhất của Spinner là số lượng sản phẩm đang có trong kho( sản phẩm tương)
+                                            @if (!isInBag)
+                                            {
+                                                int maxSoLuong = _db.Products.Where(s => s.ID == Model.ID).Select(s => s.InStock).FirstOrDefault();
+                                                int defaulValue = 1, minSoLuong = 1;
+                                                if (maxSoLuong == 0)
+                                                {
+                                                    minSoLuong = 0; defaulValue = 0;
+                                                }
+
+                                                <input type="number" id="tanggiam" name="Amount" value="@defaulValue" min="@minSoLuong" max="@maxSoLuong">
 
                                             }
 
                                         }
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="form-group row">
-                                    <div class="col-4">
-                                    </div>
-                                    <div class="col-8">
-                                        <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn">Add To Bag </button>
-                                    </div>
-                                </div>
-                            }
-                        }
 
-                    </div>
-                        <div class="col-1">
 
+
+                                    </div>
+                                    <div class="col-4"></div>
+                                    @{
+                                        if (User.IsInRole(SD.Customer))
+                                        {
+                                            <div class="row" style="padding-left:25px;padding-top:40px  ">
+
+                                                @if (isInBag)
+                                                {
+                                                    <button type="submit" value="Remove From Bag" asp-action="remove" asp-route-id="@Model.ID" class="btn btn-danger form-control">Remove From Bag</button>
+
+                                                }
+                                                //Nếu còn sản phẩm sẽ xuất hiện nút addtobag
+                                                else
+                                                {
+                                                    @if (@Model.InStock > 0)
+                                                    {
+                                                        <button type="submit" value="Add to Bag" asp-route-id="@Model.ID" class="btn essence-btn form-control">Add To Bag</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn"> </button>
+
+                                                    }
+
+                                                }
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row" style="padding-left:25px;padding-top:40px">
+                                                    <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn">Add To Bag </button>
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+
+                            </div>
                         </div>
-                        <br />
-
-                    </div>
-                    <div class="form-group">
-                        <input hidden asp-for="ID" />
-                        <a asp-area="Customer" asp-controller="Shop" asp-action="Index" class="btn btn-success">Back to List</a>
-                    </div>
-                </form>
-
-
+                    </form>
+                </div>
             </div>
-        </section>
-
-
-
-   
+        </div>
+    </div>
+</section>

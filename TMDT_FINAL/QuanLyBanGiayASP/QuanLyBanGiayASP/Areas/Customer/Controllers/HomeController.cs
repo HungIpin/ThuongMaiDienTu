@@ -30,10 +30,10 @@ namespace QuanLyBanGiayASP.Controllers
             };
         }
 
-        public async Task<IActionResult> Index(string typepro="PRO")
+        public IActionResult Index()
         {
-            var productList = await _db.Products.Include(m => m.Merchants).Include(m => m.Brands).Include(m => m.TypeProduct).Where(m => m.TypeProduct.TypePro ==typepro).ToListAsync();
-            for(int i=0;i<productList.Count;i++)
+            var productList = _db.Products.Include(m => m.Merchants).Include(m => m.Brands).Include(m => m.TypeProduct).ToList();
+            for (int i = 0; i < productList.Count; i++)
             {
                 ShopVM.Products.Add(productList[i]);
             }

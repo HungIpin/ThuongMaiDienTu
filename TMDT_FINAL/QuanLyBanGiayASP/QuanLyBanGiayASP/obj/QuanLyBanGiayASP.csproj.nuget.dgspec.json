@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj": {}
+    "F:\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj": {
+    "F:\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+        "projectUniqueName": "F:\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
         "projectName": "QuanLyBanGiayASP",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+        "projectPath": "F:\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\obj\\",
+        "outputPath": "F:\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

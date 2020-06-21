@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aPQAvba/zDRRXgR0dozW3b1Ngeifb6NzNJeIuMiNBpzqDC9e6XzgApB+aeWVJF4bfiOVp/fqIFvHR+AV4mvhTw==",
+  "dgSpecHash": "WhWn0UCF79CUQdFnc/dt7A1BOE1Au0yp534tEt0uKb44Ur/GWbl1Q5I+ccn0IIvBqyjRUvxpH7c6NBxxbradRw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hoang\\Desktop\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+  "projectFilePath": "D:\\chcuhcuchcu\\tmdt\\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\\DO AN FINAL WEB\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hoang\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.0.0\\microsoft.aspnetcore.cryptography.internal.3.0.0.nupkg.sha512",
     "C:\\Users\\hoang\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.0.0\\microsoft.aspnetcore.cryptography.keyderivation.3.0.0.nupkg.sha512",
