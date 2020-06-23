@@ -342,16 +342,13 @@
                 }*@
             </div>
             <div class=" col-md-6">
-                <div class="single_product_desc clearfix">
                     <form method="post">
                         <div class="row">
                             <div class="col-8">
-                                <span>@Model.Brands.Name</span>
-                                <h2>@Model.Name</h2>
-                                <div hidden></div>
-                                <p class="product-price"><span class="old-price">$65.00</span> @Model.Price $</p>
-
-                                <p style="width:500px">@Model.Description</p>
+                                <span>@Model.Brands.Name </span>
+                                <h2>@Model.Name  <span style="padding-left:30px;color:red">@Model.Price $</span></h2>
+                               
+                                <span><p style="width:500px">@Model.Description</p> </span>
                                 @*@if (!Model.Merchants.Name_merchant.Equals("--None--"))
             {
                 <input asp-for="Merchants.Name_merchant" class="form-control" readonly />
@@ -438,5 +435,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>

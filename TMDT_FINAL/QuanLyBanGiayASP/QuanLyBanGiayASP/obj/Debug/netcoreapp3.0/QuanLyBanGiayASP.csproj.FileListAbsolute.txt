@@ -3223,7 +3223,6 @@ F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL 
 F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\QuanLyBanGiayASP.csprojAssemblyReference.cache
 F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\staticwebassets\QuanLyBanGiayASP.StaticWebAssets.Manifest.cache
 F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\staticwebassets\QuanLyBanGiayASP.StaticWebAssets.xml
 F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\QuanLyBanGiayASP.MvcApplicationPartsAssemblyInfo.cs
@@ -3583,3 +3582,4 @@ D:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL 
 D:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\QuanLyBanGiayASP.dll
 D:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\QuanLyBanGiayASP.pdb
 D:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\QuanLyBanGiayASP.genruntimeconfig.cache
+F:\chcuhcuchcu\tmdt\17110139-ChuMinhHoang17110168-PhamHuynhThanhLam\DO AN FINAL WEB\QuanLyBanGiayASP\QuanLyBanGiayASP\obj\Debug\netcoreapp3.0\QuanLyBanGiayASP.csprojAssemblyReference.cache
