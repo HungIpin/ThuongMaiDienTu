@@ -1,0 +1,23 @@
+﻿<ul class="sidebar-menu" data-widget="tree">
+    <li class="header">Management</li>
+    <!-- Optionally, you can add icons to the links -->
+    <li class="active"><a asp-area="Admin" asp-controller="Merchants" asp-action="Index"><i class="fa fa-link"></i> <span>Merchant</span></a></li>
+    <li class="active"><a asp-area="Admin" asp-controller="AdminUsers" asp-action="Index"><i class="fa fa-link"></i> <span>Admin User</span></a></li>
+    <li class="active"><a asp-area="Admin" asp-controller="Products" asp-action="Index"><i class="fa fa-link"></i> <span>Product</span></a></li>
+    <li class="active"><a asp-area="Admin" asp-controller="Brands" asp-action="Index"><i class="fa fa-link"></i> <span>Brand</span></a></li>
+    <li class="active"><a asp-area="Admin" asp-controller="Orders" asp-action="Index"><i class="fa fa-link"></i> <span>Order</span></a></li>
+    <li class="active"><a asp-area="Admin" asp-controller="TypeProduct" asp-action="Index"><i class="fa fa-link"></i> <span>TypeProduct</span></a></li>
+    <li class="active"><a asp-area="Admin" asp-controller="StoreImport" asp-action="Index"><i class="fa fa-link"></i> <span>ImportProduct</span></a></li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-link"></i> <span>Customer Management</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a a asp-area="Admin" asp-controller="Customers" asp-action="Index">Customer List</a></li>
+            <li><a asp-area="Admin" asp-controller="Orders" asp-action="Index">Order</a></li>
+        </ul>
+    </li>
+</ul>

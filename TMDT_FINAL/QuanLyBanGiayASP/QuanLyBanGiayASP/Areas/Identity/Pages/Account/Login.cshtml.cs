@@ -85,8 +85,22 @@ namespace QuanLyBanGiayASP.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    // Get the roles for the user
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var includesrole = roles.Contains("Super Admin"); //Check role of the user
+                    if (includesrole)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return RedirectToAction("Index", "AdminPage", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
+                    //_logger.LogInformation("User logged in.");
+                    //return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
