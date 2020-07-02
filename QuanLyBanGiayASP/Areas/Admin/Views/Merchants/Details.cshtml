@@ -1,0 +1,53 @@
+﻿@model QuanLyBanGiayASP.Models.Merchants
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+<br />
+<h2 style="text-align:center" >Merchant Details</h2>
+
+<div class="p-4 border rounded container">
+    <div class="form-group row">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <label asp-for="Name_merchant" >Merchant</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Name_merchant" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <label asp-for="Address" >Address</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Address" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <label asp-for="Phone" >Phone</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Phone" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <label asp-for="Description" >Description</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Description" disabled class="form-control" />
+        </div>
+    </div>
+
+    <br />
+    <div style="text-align:center">
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary">Edit</a>
+        <a asp-action="Index" class="btn btn-success">Back to List</a>
+    </div>
+</div>
