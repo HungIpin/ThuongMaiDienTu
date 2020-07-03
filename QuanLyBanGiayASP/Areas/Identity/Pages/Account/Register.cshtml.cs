@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.Logging;
 using MimeKit;
+using QuanLyBanGiayASP.Data;
 using QuanLyBanGiayASP.Models;
 using QuanLyBanGiayASP.Utility;
 
@@ -30,6 +31,7 @@ namespace QuanLyBanGiayASP.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
@@ -65,6 +67,7 @@ namespace QuanLyBanGiayASP.Areas.Identity.Pages.Account
             [StringLength(100, ErrorMessage = "{0} tối thiểu {2} và tối đa {1} kí tự.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Mật khẩu")]
+
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
@@ -159,7 +162,8 @@ namespace QuanLyBanGiayASP.Areas.Identity.Pages.Account
                     string confirmationToken = _userManager.GenerateEmailConfirmationTokenAsync(user).Result;
                     string confirmationLink = Url.Action("ConfirmEmail",
                         "AccountConfirm", new { userId = user.Id, token = confirmationToken },
-                        protocol: HttpContext.Request.Scheme);
+                        protocol: HttpContext.Request.Scheme);                  
+                   
                     using (SmtpClient client = new SmtpClient())
                     {
                         var message = new MimeMessage();
@@ -179,10 +183,17 @@ namespace QuanLyBanGiayASP.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+                
             }
+            //else
+            //{
+            //    ModelState.AddModelError("SameUsername", "Tài khoản đã được đăng ký");
+            //    return Page();
+            //}
 
             // If we got this far, something failed, redisplay form
             return Page();
         }
+       
     }
 }

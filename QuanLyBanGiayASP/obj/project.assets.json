@@ -9327,11 +9327,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Thương mại điện tử\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+      "projectUniqueName": "F:\\Thương mại điện tử\\FinalProject_TMDT\\ThuongMaiDienTu\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
       "projectName": "QuanLyBanGiayASP",
-      "projectPath": "F:\\Thương mại điện tử\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+      "projectPath": "F:\\Thương mại điện tử\\FinalProject_TMDT\\ThuongMaiDienTu\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
       "packagesPath": "C:\\Users\\TieuCuong\\.nuget\\packages\\",
-      "outputPath": "F:\\Thương mại điện tử\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\obj\\",
+      "outputPath": "F:\\Thương mại điện tử\\FinalProject_TMDT\\ThuongMaiDienTu\\QuanLyBanGiayASP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

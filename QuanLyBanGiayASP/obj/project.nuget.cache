@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bOAWeCvfDLAs8RpJ6WAW9jimZQEIfPOeqQY7U6I3J1IQQpn//+It9FbgxWCvs1j9D4jeDXga/ce1OzHu0iayJA==",
+  "dgSpecHash": "bvjx+IYx8KoZA0H6cv8jJi3YnqlJDwRhOavo/x0+SyOElp8klGlC1XruUWkfHassQABYWZGFABIgObML+TJAug==",
   "success": true,
-  "projectFilePath": "F:\\Thương mại điện tử\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+  "projectFilePath": "F:\\Thương mại điện tử\\FinalProject_TMDT\\ThuongMaiDienTu\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TieuCuong\\.nuget\\packages\\bootstrap\\4.5.0\\bootstrap.4.5.0.nupkg.sha512",
     "C:\\Users\\TieuCuong\\.nuget\\packages\\jquery\\3.0.0\\jquery.3.0.0.nupkg.sha512",
