@@ -1,0 +1,53 @@
+﻿@model IEnumerable<QuanLyBanGiayASP.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2> Admin Users List</h2>
+        </div>
+        <div class="col-9"></div>
+    </div>
+
+    <br />
+    <div>
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    Tên Khách Hàng
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Số ĐT
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.PhoneNumber)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+
+
+

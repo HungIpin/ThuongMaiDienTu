@@ -1,0 +1,62 @@
+﻿@model IEnumerable<QuanLyBanGiayASP.Models.Merchants>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 style="text-align:center">Danh sách nhà cung cấp</h2>
+        </div><div class="col-9"></div>
+        <div class="col-md-3 col-sm-6 text-right">
+            <a asp-action="Create" class="btn essence-btn"><i class="fas fa-plus"></i>   &nbsp; Thêm nhà cung cấp</a>
+        </div>
+    </div>
+    <br />
+    <div>
+        <table class="table table-striped">
+            <tr class="table-info">
+                <th>
+                   <span>Tên nhà cung cấp</span>
+                </th>
+                <th>
+                    <span>Địa chỉ</span>
+                </th>
+                <th>
+                    <span>Số điện thoại</span>
+                </th>
+                <th>
+                    <span>Mô tả</span>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Name_merchant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Description)
+                    </td>
+                    <td>
+                        <partial name="_TableButtonPartial" model="item.ID" />
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+</div>
+

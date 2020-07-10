@@ -1,0 +1,79 @@
+﻿@model IEnumerable<QuanLyBanGiayASP.Models.ApplicationUser>
+@using QuanLyBanGiayASP.Utility
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Danh sách tài khoản quản lý </h2>
+        </div>
+        <div class="col-9"></div>
+        <div class="col-3 text-right">
+            @if (User.IsInRole(SD.SuperAdminEndUser))
+                {
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn essence-btn"><i class="fas fa-plus"></i>&nbsp; Thêm tài khoản quản lý</a>
+                 }
+        </div>
+    </div>
+
+    <br />
+    <div>
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    <span>Tên</span>
+                </th>
+                <th>
+                    <span>Email</span>
+                </th>
+                <th>
+                    <span>Số điện thoại</span>
+                </th>
+                <th>
+                    Disabled
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @if (item.LockoutEnd != null && item.LockoutEnd > DateTime.Now)
+                        {
+                            <label>Disabled</label>
+                        }
+                    </td>
+                    <td>
+                        @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
+                        {
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Edit/" + item.Id).Replace("%2F","/")">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+item.Id).Replace("%2F","/")">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        }
+                    </td>
+
+                </tr>
+
+            }
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,15 @@
+﻿@inject SignInManager<IdentityUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="list-group">
+    <li class="list-group-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext) text-dark" id="profile" asp-page="./Index">Tệp thông tin</a></li>
+    <li class="list-group-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext) text-dark" id="email" asp-page="./Email">Email</a></li>
+    <li class="list-group-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext) text-dark" id="change-password" asp-page="./ChangePassword">Mật khẩu</a></li>
+    @if (hasExternalLogins)
+    {
+        <li id="external-logins" class="list-group-item"><a id="external-login" class=" @*nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)*@ list-group-item text-dark" asp-page="./ExternalLogins">nhập lại mật khẩu</a></li>
+    }
+    <li class="list-group-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext) text-dark" id="two-factor" asp-page="./TwoFactorAuthentication">kiểu thanh toán</a></li>
+    <li class="list-group-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext) text-dark" id="personal-data" asp-page="./PersonalData">thông tin cá nhân</a></li>
+</ul>

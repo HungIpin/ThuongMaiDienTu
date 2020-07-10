@@ -1,0 +1,26 @@
+﻿@model QuanLyBanGiayASP.Models.TypeProduct
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+<br />
+<h2 style="text-align:center">Chi tiết nhãn hiệu</h2>
+
+<div class="p-4 border rounded container">
+    <div class="form-group row">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <label asp-for="TypePro">Tên</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="TypePro" disabled class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div style="text-align:center">
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-success">Trở về danh sách</a>
+    </div>
+</div>
+

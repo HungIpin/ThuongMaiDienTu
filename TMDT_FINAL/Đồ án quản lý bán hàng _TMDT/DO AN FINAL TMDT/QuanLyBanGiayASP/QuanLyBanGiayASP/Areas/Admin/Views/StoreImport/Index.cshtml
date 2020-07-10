@@ -1,0 +1,113 @@
+﻿@model IEnumerable<QuanLyBanGiayASP.Models.ImportDetails>
+@using QuanLyBanGiayASP.Data;
+@using QuanLyBanGiayASP.Extensions
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<br />
+<br />
+@{
+   //thống kê tổng số lượng sản phẩm theo ngày nhập
+ }
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 style="text-align:center">Danh sách nhập</h2>
+
+        </div><div class="col-9"></div>
+        <div class="col-md-3 col-sm-6 text-right">
+            <a asp-action="Update" class="btn essence-btn"><i class="fas fa-plus"></i>   &nbsp; Nhập hàng</a>
+        </div>
+    </div>
+    <br />
+    <div>
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    Ngày nhập
+                </th>
+                <th>
+                    Số lượng
+                </th>
+            </tr>
+
+            @{
+
+                int count = 0;
+                DateTime date = DateTime.Now;
+                DateTime[] A = new DateTime[50];
+                int i = 0, first = 0, k = 0;
+                foreach (var itemout in Model)
+                {
+                    k = 0;
+                    if (first == 0)
+                    {
+                        foreach (var itemin in Model)
+                        {
+                            if (itemout.DateImport == itemin.DateImport)
+                            {
+                                count++;
+                            }
+                        }
+                        first++;
+                        A[i] = itemout.DateImport;
+                        i++;
+                        <tr>
+                            <td>
+                                @itemout.DateImport
+                            </td>
+                            <td>
+                                @count
+                            </td>
+                        </tr>
+                        count = 0;
+                    }
+                    else
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            if (itemout.DateImport == A[j])
+                            {
+                                k = 1;
+                            }
+                        }
+                        if (k != 1)
+                        {
+                            for (int j = 0; j < i; j++)
+                            {
+                                if (itemout.DateImport != A[j])
+                                {
+                                    foreach (var itemin in Model)
+                                    {
+                                        if (itemout.DateImport == itemin.DateImport)
+                                        {
+                                            count++;
+                                        }
+                                    }
+                                    A[i] = itemout.DateImport;
+                                    i++;
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(t => itemout.DateImport)
+                                        </td>
+                                        <td>
+                                            @count
+                                        </td>
+                                    </tr>
+                                    count = 0;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+        </table>
+    </div>
+</div>
+
+

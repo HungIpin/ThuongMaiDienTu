@@ -1,0 +1,123 @@
+﻿
+@model QuanLyBanGiayASP.Models.Products
+@using QuanLyBanGiayASP.Extensions
+@using Microsoft.AspNetCore.Http
+@using QuanLyBanGiayASP.Models.ViewModels
+@using QuanLyBanGiayASP.Data;
+@using QuanLyBanGiayASP.Utility
+
+@inject ApplicationDbContext _db
+@inject IHttpContextAccessor HttpContextAccessor
+<div class="cart-bg-overlay"></div>
+<section class="single_product_details_area d-flex align-items-center">
+
+
+    <div class="container" style="padding-top:50px;padding-bottom:50px;">
+
+        <div class="row">
+            <div class=" col-md-6" >
+                <img src="@Model.Image" /> <br /><br />
+                @{
+                    //nếu sản phẩm có số lượng thì sẽ xuất hiện hình instock
+                }
+                @*@if (Model.InStock > 0)
+                {
+                    <div style="margin-left:350px"><img src="~/images/inStock.png" width="20%" /></div>
+
+                }*@
+            </div>
+            <div class=" col-md-6">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-8">
+                                <span>@Model.Brands.Name </span>
+                                <h2>@Model.Name  <span style="padding-left:30px;color:red">@Model.Price $</span></h2>
+                               
+                                <span><p style="width:500px">@Model.Description</p> </span>
+                                @*@if (!Model.Merchants.Name_merchant.Equals("--None--"))
+            {
+                <input asp-for="Merchants.Name_merchant" class="form-control" readonly />
+            }*@
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <label for="tanggiam">Số lượng</label>
+                                    </div>
+                                    <div class="col-4">
+                                        @{
+                                            bool isInBag = false;
+                                            List<Amount_Product> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<Amount_Product>>("ssShoppingCart");
+                                            if (lstCart != null)
+                                            {
+                                                foreach (Amount_Product item in lstCart)
+                                                {
+                                                    if (item.IDProduct == Model.ID)
+                                                    {
+                                                        <input asp-for="@item.Amount" class="form-control" readonly />
+                                                        isInBag = true;
+                                                    }
+                                                }
+
+                                            }
+                                            //số lượng lớn nhất của Spinner là số lượng sản phẩm đang có trong kho( sản phẩm tương)
+                                            @if (!isInBag)
+                                            {
+                                                int maxSoLuong = _db.Products.Where(s => s.ID == Model.ID).Select(s => s.InStock).FirstOrDefault();
+                                                int defaulValue = 1, minSoLuong = 1;
+                                                if (maxSoLuong == 0)
+                                                {
+                                                    minSoLuong = 0; defaulValue = 0;
+                                                }
+
+                                                <input type="number" id="tanggiam" name="Amount" value="@defaulValue" min="@minSoLuong" max="@maxSoLuong">
+
+                                            }
+
+                                        }
+
+
+
+                                    </div>
+                                    <div class="col-4"></div>
+                                    @{
+                                        if (User.IsInRole(SD.Customer))
+                                        {
+                                            <div class="row" style="padding-left:25px;padding-top:40px  ">
+
+                                                @if (isInBag)
+                                                {
+                                                    <button type="submit" value="Remove From Bag" asp-action="remove" asp-route-id="@Model.ID" class="btn btn-danger form-control">Xóa khỏi giỏ</button>
+
+                                                }
+                                                //Nếu còn sản phẩm sẽ xuất hiện nút addtobag
+                                                else
+                                                {
+                                                    @if (@Model.InStock > 0)
+                                                    {
+                                                        <button type="submit" value="Add to Bag" asp-route-id="@Model.ID" class="btn essence-btn form-control">Thêm vào giỏ</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn"> </button>
+
+                                                    }
+
+                                                }
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row" style="padding-left:25px;padding-top:40px">
+                                                    <button type="submit" style="margin-right:50px" value="Add to Bag" disabled class="btn essence-btn">Thêm vào giỏ </button>
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>

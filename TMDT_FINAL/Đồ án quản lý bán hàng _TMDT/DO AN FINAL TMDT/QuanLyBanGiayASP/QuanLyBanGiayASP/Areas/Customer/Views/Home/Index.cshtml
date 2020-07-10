@@ -1,0 +1,290 @@
+﻿@using QuanLyBanGiayASP.Utility;
+@model QuanLyBanGiayASP.Models.ViewModels.ShopViewModels
+@using Microsoft.AspNetCore.Http;
+@using QuanLyBanGiayASP.Extensions;
+@using QuanLyBanGiayASP.Models.ViewModels;
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<br />
+<br />
+
+<div class="cart-bg-overlay"></div>
+
+<div class="right-side-cart-area">
+
+    <!-- Cart Button -->
+    <div class="cart-button">
+        <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+    </div>
+</div>
+<!-- ##### Right Side Cart End ##### -->
+<!-- ##### Welcome Area Start ##### -->
+<section class="welcome_area bg-img background-overlay" style="background-image: url(img/dayne-topkin-OT1D53cUbnI-unsplash.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="hero-content">
+                   
+                    <h2>Bộ sưu tập mới</h2>
+                    <a asp-area="Customer" asp-action="Index" asp-controller="Shop" class="btn essence-btn">Xem bộ sưu tập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="top_catagory_area section-padding-80 clearfix">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/bg-2.jpg);">
+                    <div class="catagory-content">
+                        <a asp-area="Customer" asp-action="Index" asp-controller="Shop">Thoải mái</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/bg-3.jpg);">
+                    <div class="catagory-content">
+                        <a asp-area="Customer" asp-action="Index" asp-controller="Shop">Giày</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Catagory -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/bg-4.jpg);">
+                    <div class="catagory-content">
+                        <a asp-area="Customer" asp-action="Index" asp-controller="Shop">Sang trọng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-heading text-center">
+                <h2>Sản phẩm chất lượng cao</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-12">
+        <div class="popular-products-slides owl-carousel">
+
+            @foreach (var product in Model.Products)
+            {
+                if (product.TypeProduct.TypePro == "PRO")
+                {
+                    <!-- Single Product -->
+                    <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img">
+                            <img src="@product.Image" alt="">
+                            <!-- Hover Thumb -->
+                        </div>
+                        <!-- Product Description -->
+                        <div class="product-description">
+                            <span>@product.Brands.Name</span>
+
+                            <h5>@product.Name</h5>
+                            <p class="product-price">$@product.Price</p>
+
+                            <!-- Hover Content -->
+                            <div class="hover-content" style="text-align:center">
+                                <!-- Add to Cart -->
+                                <div class="add-to-cart-btn" style="text-align:center">
+                                    <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="btn essence-btn  style=" text-align:center"">
+                                        Mua ngay
+                                        <i class="fa fa-chevron-right "></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!-- ##### Welcome Area End ##### -->
+<!-- ##### Top Catagory Area Start ##### -->
+
+
+
+<div class="cta-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="cta-content bg-img background-overlay" style="background-image: url(img/bg-img/bg-5.jpg);">
+                    <div class="h-100 d-flex align-items-center justify-content-end">
+                        <div class="cta--text">
+                            <h2>Giày ngoại</h2>
+                            <a asp-area="Customer" asp-action="Index" asp-controller="Shop" class="btn essence-btn">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-heading text-center">
+                <h2>Sản phẩm bán chạy</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-12">
+        <div class="popular-products-slides owl-carousel">
+
+            @foreach (var product in Model.Products)
+            {
+                if (product.TypeProduct.TypePro == "POPULAR")
+                {
+                    <!-- Single Product -->
+                    <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img">
+                            <img src="@product.Image" alt="">
+                            <!-- Hover Thumb -->
+                        </div>
+                        <!-- Product Description -->
+                        <div class="product-description">
+                            <span>@product.Brands.Name</span>
+
+                            <h5>@product.Name</h5>
+                            <p class="product-price">$@product.Price</p>
+
+                            <!-- Hover Content -->
+                            <div class="hover-content" style="text-align:center">
+                                <!-- Add to Cart -->
+                                <div class="add-to-cart-btn" style="text-align:center">
+                                    <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="btn essence-btn  style=" text-align:center"">
+                                        Mua ngay
+                                        <i class="fa fa-chevron-right "></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="section-heading text-center">
+                <h2>Sản phẩm HOT</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-12">
+        <div class="popular-products-slides owl-carousel">
+
+            @foreach (var product in Model.Products)
+            {
+                if (product.TypeProduct.TypePro == "SELLEST")
+                {
+                    <!-- Single Product -->
+                    <div class="single-product-wrapper">
+                        <!-- Product Image -->
+                        <div class="product-img">
+                            <img src="@product.Image" alt="">
+                            <!-- Hover Thumb -->
+                        </div>
+                        <!-- Product Description -->
+                        <div class="product-description">
+                            <span>@product.Brands.Name</span>
+
+                            <h5>@product.Name</h5>
+                            <p class="product-price">$@product.Price</p>
+
+                            <!-- Hover Content -->
+                            <div class="hover-content" style="text-align:center">
+                                <!-- Add to Cart -->
+                                <div class="add-to-cart-btn" style="text-align:center">
+                                    <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="btn essence-btn  style=" text-align:center"">
+                                        Mua ngay
+                                        <i class="fa fa-chevron-right "></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!-- ##### Top Catagory Area End ##### -->
+<!-- ##### CTA Area Start ##### -->
+<!-- ##### CTA Area End ##### -->
+<!-- ##### New Arrivals Area Start ##### -->
+
+
+
+<div class="brands-area d-flex align-items-center justify-content-between">
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="~/img/core-img/brand1.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="~/img/core-img/brand2.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="~/img/core-img/brand3.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="~/img/core-img/brand4.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="~/img/core-img/brand5.png" alt="">
+    </div>
+    <!-- Brand Logo -->
+    <div class="single-brands-logo">
+        <img src="~/img/core-img/brand6.png" alt="">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

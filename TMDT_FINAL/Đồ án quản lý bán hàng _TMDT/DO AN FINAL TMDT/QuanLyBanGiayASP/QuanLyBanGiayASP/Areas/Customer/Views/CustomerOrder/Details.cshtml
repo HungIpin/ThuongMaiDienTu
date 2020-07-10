@@ -1,0 +1,175 @@
+﻿@model QuanLyBanGiayASP.Models.ViewModels.OrderDetailViewModels
+@using QuanLyBanGiayASP.Extensions
+@using QuanLyBanGiayASP.Utility
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<h2 style="text-align:center">Chi tiết đặt hàng</h2>
+<div class="container">
+    <div class="p-4 border rounded row">
+        <div class="col-6">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Tên khách hàng</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Order.Customers.CustomerName" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Order.Date">Ngày</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Order.Date" id="datepicker" readonly type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Order.Time">Giờ</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Order.Time" id="timepicker" readonly type="text" class="timepicker form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Order.Customers.Phone">Số điện thoại</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Order.Customers.Phone" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Order.Customers.Email"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Order.Customers.Email" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Order.Address">Địa chỉ</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Order.Address" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Order.isConfirmed">Duyệt</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Order.isConfirmed" disabled class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            @{
+                double tong = 0;
+                int dem = 1;
+                string total = "";
+            }
+            <div class="container">
+                <div class="row">
+                    @if (Model.Products.Count > 0)
+                    {
+                        <table class="table table-striped" width="100%" style="border:0.4px solid black">
+                            <tr class="table-info">
+                                @*<th style="text-align:center; width:20%"></th>*@
+                                <th style="text-align:center;">
+                                    <label>STT</label>
+                                </th>
+                                <th style="text-align:center;">
+                                    <label asp-for="@Model.Products.FirstOrDefault().Name"></label>
+                                </th>
+                                <th style="text-align:center;">
+                                    <label asp-for="@Model.Products.FirstOrDefault().Price"></label>
+                                </th>
+                                <th style="text-align:center;">
+                                    <label>Số lượng</label>
+                                </th>
+                                <th style="text-align:center;">
+                                    <label>Thành tiền</label>
+                                </th>
+                                <th style="text-align:center;"></th>
+                            </tr>
+                            @foreach (var item in Model.Products)
+                            {
+                                <tr style="padding:50px;">
+                                    <td style="text-align:center">
+                                        @dem
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Html.DisplayFor(c => item.Name)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Html.DisplayFor(c => item.Price)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.Amount).FirstOrDefault()
+                                    </td>
+                                    <td style="text-align:center">
+                                        @Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault()
+                                        @{
+                                            tong = tong + Model.Order.OrderItems.Where(a => a.OrderID == Model.Order.ID && a.ProductID == item.ID).Select(a => a.tongtien).FirstOrDefault();
+                                            total = tong.ToString();
+                                        }
+                                    </td>
+
+                                    <td style="text-align:center">
+                                    </td>
+                                </tr>
+                                dem += 1;
+                            }
+                        </table>
+                        <div class="container form-group">
+                            <form method="post" asp-action="TopupWithPaypal" asp-controller="Paypal">
+                                <label>Total cost:</label>
+                                <input name="topupAmount" placeholder="Tối thiểu 22.000 VNĐ" min="22000" max="9999999999999" value="@total" class="form-control" readonly /><span></span>
+                                @if (Model.Order.isConfirmed == true)
+                                {
+                                    <button style="background-color:red">Thanh Toán</button>
+                                }
+                                <button asp-action="Index" style="background-color:green">Back to List</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>No items added to the shopping cart...</div>
+                    }
+                </div>
+            </div>
+            <br />
+
+
+        </div>
+    </div>
+
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                var appointmentTime = document.getElementById('datepicker').value;
+                var splitData = "";
+                if (appointmentTime.indexOf(" ") > 0) {
+                    splitData = appointmentTime.split(" ");
+                }
+                else {
+                    splitData = appointmentTime.split("T");
+                }
+                var time = splitData[1].substring(0, 5);
+                if (time.slice(-1) == ":") {
+                    time = time.substring(0, time.length - 1);
+                }
+                var amPmTime = splitData[2];
+                $('#datepicker').attr('value', splitData[0]);
+                $('#timepicker').attr('value', time + ' ' + amPmTime);
+            });
+        </script>
+    }

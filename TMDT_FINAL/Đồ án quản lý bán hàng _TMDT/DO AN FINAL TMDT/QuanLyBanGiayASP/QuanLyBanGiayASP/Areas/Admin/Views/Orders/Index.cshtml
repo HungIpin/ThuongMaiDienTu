@@ -1,0 +1,91 @@
+﻿@model QuanLyBanGiayASP.Models.ViewModels.OrderViewModels
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+<form method="get">
+    <br /><br />
+    <h2 style="text-align:center">Danh sách đơn hàng</h2>
+    <br />
+
+    
+
+    <br /><br />
+
+    <div class="container">
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    Nhân viên
+                </th>
+                <th>
+                    Ngày đặt
+                </th>
+                <th>
+                    Khách hàng
+                </th>
+                <th>
+                    Điện thoại
+                </th>
+                <th>
+                    Mail
+                </th>
+                <th>
+                    Available
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(m => item.SalerPerson.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Customers.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Customers.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Customers.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.isConfirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Address)
+                    </td>
+                    <td>
+                        <partial name="_TableButtonPartial" model="item.ID" />
+                    </td>
+                </tr>
+
+            }
+        </table>
+        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+             page-class="btn border" page-class-normal="btn btn-default active"
+             page-class-selected="btn btn-primary active" class="btn-group m-1"></div>
+    </div>
+
+
+
+</form>
+
+@section Scripts{
+    <script>
+    $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });</script>
+}

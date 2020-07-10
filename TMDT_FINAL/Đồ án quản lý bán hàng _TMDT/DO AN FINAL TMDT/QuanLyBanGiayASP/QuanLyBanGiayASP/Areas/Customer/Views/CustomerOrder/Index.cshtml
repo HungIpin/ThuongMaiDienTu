@@ -1,0 +1,65 @@
+﻿@model QuanLyBanGiayASP.Models.ViewModels.CustomerOrderViewModels
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <div class="container" style="padding-top:40px">
+        <h2>Danh sách Order</h2>
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    Họ Tên
+                </th>
+                <th>
+                    Ngày Đặt
+                </th>
+                <th>
+                    Số ĐT
+                </th>
+                <th>
+                    Mail
+                </th>
+                <th>
+                    Địa Chỉ
+                </th>
+                <th>
+                    Tình Trạng
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(m => item.CustomerPerson.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.CustomerPerson.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.CustomerPerson.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.isConfirmed)
+                    </td>
+                    <td>
+                        <partial name="_TableButtonPartial" model="item.ID" />
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+

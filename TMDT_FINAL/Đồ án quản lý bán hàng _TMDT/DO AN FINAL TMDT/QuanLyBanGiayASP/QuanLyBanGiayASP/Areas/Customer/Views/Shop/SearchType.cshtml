@@ -1,0 +1,168 @@
+﻿@model QuanLyBanGiayASP.Models.ViewModels.ShopViewModels
+@using Microsoft.AspNetCore.Http;
+@using QuanLyBanGiayASP.Extensions;
+@using QuanLyBanGiayASP.Utility;
+@using QuanLyBanGiayASP.Models.ViewModels;
+@inject IHttpContextAccessor HttpContextAccessor
+<div class="cart-bg-overlay"></div>
+<div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="page-title text-center">
+                    <h2> Shoes </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ##### Breadcumb Area End ##### -->
+<!-- ##### Shop Grid Area Start ##### -->
+<section class="shop_grid_area section-padding-80">
+    @{
+        int count = HttpContextAccessor.HttpContext.Session.Get<int>("ssAmount");
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="shop_sidebar_area">
+
+
+                        <!-- ##### Single Widget ##### -->
+                        <div class="widget brands mb-50">
+                            <!-- Widget Title 2 -->
+                            <a asp-action="Index">Tất cả</a>
+                            <p class="widget-title2 mb-30">Nhãn</p>
+                            @{
+                                foreach (var brands in Model.Brands)
+                                {
+                                    <div class="widget-desc">
+                                        <ul>
+                                            @{
+                                                //Search theo Brand ID ứng với tên Brand tương ứng
+
+                                                <li><a asp-action="Search" asp-route-id="@brands.ID">@brands.Name</a></li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+                            }
+                            @{
+                                <p class="widget-title2 mb-30">Loại</p>
+
+                                foreach (var typeProducts in Model.typeProducts)
+                                {
+                                    <div class="widget-desc">
+                                        <ul>
+                                            @{
+                                                //Search theo Brand ID ứng với tên Brand tương ứng
+
+                                                <li><a asp-action="SearchType" asp-route-id="@typeProducts.ID">@typeProducts.TypePro</a></li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-8 col-lg-9">
+                    <div class="shop_grid_product_area">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="product-topbar d-flex align-items-center justify-content-between">
+                                    <!-- số lượng -->
+
+
+                                    <div>@count tìm thấy</div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="col-12">
+                                <div class="popular-products-slides owl-carousel">
+
+                                    @foreach (var product in Model.Products)
+                                    {
+                                        <!-- Single Product -->
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="@product.Image" alt="">
+                                                <!-- Hover Thumb -->
+                                            </div>
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>@product.Brands.Name</span>
+
+                                                <h5>@product.Name</h5>
+                                                <p class="product-price">$@product.Price</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content" style="text-align:center">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn" style="text-align:center">
+                                                        <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="btn essence-btn  style=" text-align:center"">
+                                                            Mua ngay
+                                                            <i class="fa fa-chevron-right "></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {<div style="margin-top:30px">
+
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">
+                            <label style="font-size:23px;color:black">@product.Name</label>
+                        </h4>
+                    </div>
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@product.ID">
+                        <img class="card-img-top" style="height:;" src="@product.Image" alt="Card Image" />
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <label style="font-size:20px; color:#a51313"><b>$@product.Price</b>/sq.ft</label>
+                            </div>
+                            <a asp-action="Details" asp-controller="Home" class="btn btn-success" asp-route-id="@product.ID">
+                                Mua ngay
+                                <i class="fas fa-chevron-right "></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
