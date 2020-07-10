@@ -9103,11 +9103,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\TMDT_FINAL (1)\\TMDT_FINAL\\Đồ án quản lý bán hàng _TMDT\\DO AN FINAL TMDT\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\ThuongMaiDienTu\\TMDT_FINAL\\Đồ án quản lý bán hàng _TMDT\\DO AN FINAL TMDT\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
       "projectName": "QuanLyBanGiayASP",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\TMDT_FINAL (1)\\TMDT_FINAL\\Đồ án quản lý bán hàng _TMDT\\DO AN FINAL TMDT\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\ThuongMaiDienTu\\TMDT_FINAL\\Đồ án quản lý bán hàng _TMDT\\DO AN FINAL TMDT\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\QuanLyBanGiayASP.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\TMDT_FINAL (1)\\TMDT_FINAL\\Đồ án quản lý bán hàng _TMDT\\DO AN FINAL TMDT\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\ThuongMaiDienTu\\TMDT_FINAL\\Đồ án quản lý bán hàng _TMDT\\DO AN FINAL TMDT\\QuanLyBanGiayASP\\QuanLyBanGiayASP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
